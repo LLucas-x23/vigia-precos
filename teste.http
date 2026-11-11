@@ -1,0 +1,54 @@
+### Adiciona o item 
+POST http://localhost:3000/api/produtos
+Content-Type: application/json
+
+{
+    "fakeStoreId": 2,
+    "precoAlvo": 20
+}
+
+### Muda o preço atual
+
+PATCH http://localhost:3000/api/produtos/4/preco-simulado
+Content-Type: application/json
+
+{
+    "preco": 11
+}
+
+### Verifica se tá menor
+
+POST http://localhost:3000/api/produtos/3/verificar
+
+### Olha tudo
+
+GET http://localhost:3000/api/produtos
+
+### Olha historico de um item
+
+GET http://localhost:3000/api/produtos/3/historico
+
+### Apaga preço
+
+DELETE http://localhost:3000/api/produtos/3/preco-simulado
+
+### Cadastro
+
+POST http://localhost:3000/api/auth/cadastro
+Content-Type: application/json
+
+{
+    "nome": "Lucas",
+    "email": "lucas.lc15al@gmail.com",
+    "senha": "SenhaTeste123"
+}
+
+### Login
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "lucas.lc15al@gmail.com",
+    "senha": "SenhaTeste123"
+}
