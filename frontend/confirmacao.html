@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de e-mail | Vigia Preços</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #202938;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 40px 30px;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        .icone {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            font-size: 30px;
+            background: #e8f5ec;
+            color: #198754;
+        }
+
+        h1 {
+            margin-bottom: 12px;
+            font-size: 25px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #667085;
+            margin-bottom: 25px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background: #1d4ed8;
+        }
+
+        .erro {
+            background: #fdecec;
+            color: #dc3545;
+        }
+
+        .carregando {
+            background: #eaf1ff;
+            color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="icone carregando" id="icone">...</div>
+
+        <h1 id="titulo">Confirmando seu e-mail</h1>
+
+        <p id="mensagem">
+            Estamos verificando seu endereço. Aguarde um instante.
+        </p>
+
+        <a href="index.html" id="botao" hidden>
+            Voltar ao Vigia Preços
+        </a>
+    </main>
+
+    <script>
+        const API = 'http://localhost:3000/api/auth';
+
+        const icone = document.getElementById('icone');
+        const titulo = document.getElementById('titulo');
+        const mensagem = document.getElementById('mensagem');
+        const botao = document.getElementById('botao');
+
+        function mostrarResultado(sucesso, texto) {
+            icone.className = sucesso
+                ? 'icone'
+                : 'icone erro';
+
+            icone.textContent = sucesso ? '✓' : '!';
+
+            titulo.textContent = sucesso
+                ? 'E-mail confirmado!'
+                : 'Não foi possível confirmar';
+
+            mensagem.textContent = texto;
+            botao.hidden = false;
+        }
+
+        async function confirmarEmail() {
+            const parametros = new URLSearchParams(
+                window.location.search
+            );
+
+            const token = parametros.get('token');
+
+            if (!token) {
+                mostrarResultado(
+                    false,
+                    'O link não contém um token de confirmação.'
+                );
+                return;
+            }
+
+            try {
+                const resposta = await fetch(
+                    `${API}/verificar-email`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ token })
+                    }
+                );
+
+                const dados = await resposta.json();
+
+                if (!resposta.ok) {
+                    throw new Error(
+                        dados.erro || 'Link inválido ou expirado.'
+                    );
+                }
+
+                mostrarResultado(
+                    true,
+                    'Seu endereço de e-mail foi confirmado. Agora você já pode entrar na sua conta.'
+                );
+
+            } catch (erro) {
+                mostrarResultado(
+                    false,
+                    erro.message || 'Ocorreu um erro ao confirmar seu e-mail.'
+                );
+            }
+        }
+
+        confirmarEmail();
+    </script>
+</body>
+</html>

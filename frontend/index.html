@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigia Preços</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div>
+                <h1>Vigia <span>Preços</span></h1>
+                <p>Monitoramento inteligente de preços</p>
+            </div>
+
+            <div class="header-actions">
+                <span class="online">
+                    <span class="online-dot"></span>
+                    Sistema online
+                </span>
+                <div id="usuarioArea" class="usuario-area" hidden>
+                    <span id="nomeUsuario"></span>
+                    <button id="sairBtn" class="btn-secondary" type="button">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="authView" class="auth-section">
+            <div class="auth-card">
+                <div class="auth-heading">
+                    <h2 id="authTitulo">Entre na sua conta</h2>
+                    <p id="authDescricao">Acesse seus produtos monitorados.</p>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">E-mail</label>
+                        <input id="loginEmail" type="email" autocomplete="email"
+                               placeholder="voce@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginSenha">Senha</label>
+                        <input id="loginSenha" type="password" autocomplete="current-password"
+                               placeholder="Sua senha" required>
+                    </div>
+                    <button class="btn-primary auth-submit" type="submit">Entrar</button>
+                </form>
+
+                <form id="cadastroForm" class="auth-form" hidden>
+                    <div class="form-group">
+                        <label for="cadastroNome">Nome</label>
+                        <input id="cadastroNome" type="text" autocomplete="name"
+                               maxlength="100" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastroEmail">E-mail</label>
+                        <input id="cadastroEmail" type="email" autocomplete="email"
+                               placeholder="voce@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastroSenha">Senha</label>
+                        <input id="cadastroSenha" type="password" autocomplete="new-password"
+                               minlength="8" placeholder="Pelo menos 8 caracteres" required>
+                    </div>
+                    <button class="btn-primary auth-submit" type="submit">Criar conta</button>
+                </form>
+
+                <p id="authMensagem" class="auth-message" role="status" aria-live="polite"></p>
+
+                <p class="auth-switch">
+                    <span id="authAlternativa">Ainda não tem uma conta?</span>
+                    <button id="alternarAuthBtn" class="link-button" type="button">Cadastre-se</button>
+                </p>
+            </div>
+        </section>
+
+        <div id="dashboardView" hidden>
+            <section class="dashboard">
+                <div class="section-heading">
+                    <div>
+                        <h2>Dashboard</h2>
+                        <p>Acompanhe seus produtos monitorados.</p>
+                    </div>
+                    <button id="atualizarBtn" class="btn-secondary" type="button">Atualizar</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <span>Total de produtos</span>
+                        <strong id="totalProdutos">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Monitorando</span>
+                        <strong id="monitorando">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Preço atingido</span>
+                        <strong id="atingidos">0</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cadastro">
+                <h2>Adicionar produto</h2>
+                <p>Informe o ID de um produto da Fake Store API.</p>
+
+                <form id="produtoForm">
+                    <div class="form-group">
+                        <label for="fakeStoreId">ID do produto</label>
+                        <input type="number" id="fakeStoreId" min="1"
+                               placeholder="Ex: 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precoAlvo">Preço desejado (R$)</label>
+                        <input type="number" id="precoAlvo" min="0.01" step="0.01"
+                               placeholder="Ex: 50.00" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Adicionar produto</button>
+                </form>
+                <p id="mensagem" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="produtos-section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Produtos monitorados</h2>
+                        <p>Gerencie seus produtos e simule alterações.</p>
+                    </div>
+                </div>
+                <div id="listaProdutos" class="produtos-grid">
+                    <p>Carregando produtos...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
