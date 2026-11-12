@@ -9,16 +9,11 @@ const fastify = require('fastify')({
 
 const cors = require('@fastify/cors');
 
-fastify.register(cors, {
-    origin: true,
-    methods: [
-        'GET',
-        'HEAD',
-        'POST',
-        'PATCH',
-        'DELETE',
-        'OPTIONS'
-    ]
+await fastify.register(cors, {
+    origin: [
+        'https://seu-site.infinityfreeapp.com'
+    ],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
 });
 
 const jwt = require('@fastify/jwt');
