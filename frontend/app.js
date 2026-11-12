@@ -1,5 +1,5 @@
 const API = 'https://vigia-precos.onrender.com/api/produtos';
-const AUTH_API = 'https://vigia-precos.onrender.com/api/produtos';
+const AUTH_API = 'https://vigia-precos.onrender.com/api/auth';
 
 const listaProdutos = document.getElementById('listaProdutos');
 const produtoForm = document.getElementById('produtoForm');
