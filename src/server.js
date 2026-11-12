@@ -9,7 +9,7 @@ const fastify = require('fastify')({
 
 const cors = require('@fastify/cors');
 
-await fastify.register(cors, {
+fastify.register(cors, {
     origin: [
         'https://seu-site.infinityfreeapp.com'
     ],
