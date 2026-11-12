@@ -11,7 +11,7 @@ const cors = require('@fastify/cors');
 
 fastify.register(cors, {
     origin: [
-        'https://seu-site.infinityfreeapp.com'
+        'https://vigia-preco.site.je/'
     ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
 });
