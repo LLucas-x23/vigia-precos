@@ -6,7 +6,6 @@ async function buscarProduto(id) {
     },
     signal: AbortSignal.timeout(10000)
 });
-    );
 
     const conteudo = await resposta.text();
 
